@@ -16,7 +16,7 @@ echo <<<EOF
                                                          |___/ 
     Cloudflare Workers Blog System by Akkariin
 
-    https://github.com/kasuganosoras/cloudflare-worker-blog
+    https://github.com/stratosphericus/blog
 
 
 EOF;
