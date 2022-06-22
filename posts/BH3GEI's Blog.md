@@ -1,27 +1,13 @@
-### Stratoz's Blog
-The cloudflare worker blog first post.
+### 欢迎来到BH3GEI的摆烂日记
+这个家伙很懒，更新频率极低
 
-> This is a blockquote
 
-测试代码
 
-```php
-<?php
-$a = "test";
-$a->testCode();
-```
+#### 他的主要产出内容
 
-- 无序列表
-- 无序列表
-- 无序列表
-- 无序列表
-- 无序列表
-- 无序列表
+1. 折腾记录
+2. 考研笔记
+3. 项目说明
+4. 烹饪技巧
 
-1. 有序列表
-2. 有序列表
-3. 有序列表
 
-__加粗文本__
-
-*斜体文本*
