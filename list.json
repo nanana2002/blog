@@ -1,6 +1,6 @@
 [
     {
-        "title": "Stratoz's Blog",
+        "title": "BH3GEI's Blog",
         "time": "2020-10-03",
         "file": "posts/1.md"
     },
@@ -14,4 +14,10 @@
         "time": "2020-10-03",
         "file": "posts/3.md"
     }
+    {
+        "title": "本地挂载网盘的一些折腾记录",
+        "time": "2022-06-22",
+        "file": "posts/4.md"
+    }
+    
 ]
