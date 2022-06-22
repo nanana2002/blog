@@ -2,7 +2,7 @@
     {
         "title": "BH3GEI's Blog",
         "time": "2020-10-03",
-        "file": "posts/1.md"
+        "file": "posts/test.md"
     },
     {
         "title": "考研科目",
@@ -10,14 +10,19 @@
         "file": "posts/考研科目.md"
     },
     {
-        "title": "笔记",
+        "title": "ctf部分笔记",
         "time": "2020-10-03",
-        "file": "posts/3.md"
-    }
+        "file": "posts/ctf部分笔记.md"
+    },
+    {
+        "title": "有关考研",
+        "time": "2020-10-03",
+        "file": "posts/有关考研.md"
+    },
     {
         "title": "本地挂载网盘的一些折腾记录",
         "time": "2022-06-22",
-        "file": "posts/4.md"
+        "file": "posts/本地挂载网盘的一些折腾记录.md"
     }
     
 ]
