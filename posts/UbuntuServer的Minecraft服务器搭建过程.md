@@ -74,4 +74,8 @@ alias mccommand='/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p str
 
 mccommand
 ```
+
+> 记录下发现的远古遗迹:
+> 1666 -49 -1111 
+
 > https://linuxize.com/post/how-to-make-minecraft-server-on-ubuntu-20-04/
