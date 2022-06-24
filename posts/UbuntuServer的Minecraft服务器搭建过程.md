@@ -1,7 +1,8 @@
 ```shell
 sudo apt update
 sudo apt install git build-essential -y
-sudo apt install openjdk-11-jre-headless
+sudo add-apt-repository ppa:linuxuprising/java 
+ sudo apt-get install oracle-java17-installer
 
 java -version
 
