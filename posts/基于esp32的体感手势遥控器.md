@@ -14,6 +14,9 @@
  * 定义好响应头之后进入死循环开始监听，响应来自客户端的GET请求
  * 返回内容是一个与oled屏幕第一行内容相同的字符串
 
+##### 项目地址
+> https://github.com/BH3GEI/esp32Joystick
+
 ##### 食用方法
  * 接好供电，连好引脚（mpu和oled都是3v3供电；mpu的接gpio5, sda接gpio4；oled的sda接gpio13, scl接gpio14）
  * 晃动遥控器
