@@ -40,6 +40,11 @@
         "file": "posts/计算机组成原理笔记.md"
     },
     {
+        "title": "基于esp32的体感手势遥控器",
+        "time": "2022-06-22",
+        "file": "posts/基于esp32的体感手势遥控器.md"
+    },
+    {
         "title": "本地挂载网盘的一些折腾记录",
         "time": "2022-06-22",
         "file": "posts/本地挂载网盘的一些折腾记录.md"
@@ -51,28 +56,28 @@
     },
     {
         "title": "脆香米炒饭制作流程",
-        "time": "2022-06-22",
+        "time": "2022-06-23",
         "file": "posts/脆香米炒饭制作流程.md"
     },
     {
         "title": "腾讯云Ubuntu的一些初始配置",
-        "time": "2022-06-22",
+        "time": "2022-06-24",
         "file": "posts/腾讯云Ubuntu的一些初始配置.md"
     },
     {
         "title": "云端同步方案",
-        "time": "2022-06-22",
+        "time": "2022-06-24",
         "file": "posts/云端同步方案.md"
     },
     {
         "title": "基于BlueStacks和学小易的超星剪切板搜题工具",
-        "time": "2022-06-22",
+        "time": "2022-06-20",
         "file": "posts/基于BlueStacks和学小易的超星剪切板搜题工具.md"
     },
     {
-        "title": "基于esp32的体感手势遥控器",
-        "time": "2022-06-22",
-        "file": "posts/基于esp32的体感手势遥控器.md"
+        "title": "UbuntuServer的Minecraft服务器搭建过程",
+        "time": "2022-06-24",
+        "file": "posts/UbuntuServer的Minecraft搭建过程.md"
     }
     
 ]
