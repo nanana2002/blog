@@ -75,7 +75,7 @@ nano ./.bashrc
 '''
 alias mccommand='/opt/minecraft/tools/mcrcon/mcrcon -H 127.0.0.1 -P 25575 -p strong-password -t'
 '''
-source  ./.bashrc
+source ./.bashrc
 
 mccommand
 
