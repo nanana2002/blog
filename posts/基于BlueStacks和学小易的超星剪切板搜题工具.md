@@ -13,7 +13,7 @@
 ######  需要预先申请百度ocr的api并在脚本内进行更改
 ######  需要安装BlueStacks
 ##### 项目地址:
-> https://github.com/BH3GEI/searchXuexiaoyi/
+> https://github.com/BH3GEI/SearchXuexiaoyi/
 
 ##### 另注：
 ###### 仅供学习测试使用，请勿在考试过程中应用。本人不对使用本软件造成的任何后果负责。
