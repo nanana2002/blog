@@ -93,5 +93,10 @@
         "title": "codeserver安装copilot",
         "time": "2022-06-24",
         "file": "posts/codeserver安装copilot.md"
+    },
+    {
+        "title": "frp配置",
+        "time": "2022-06-24",
+        "file": "posts/frp配置.md"
     }
 ]
