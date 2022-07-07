@@ -7,9 +7,8 @@ token=xxx
 #dashboard_port = 7500
 #dashboard_user=root
 #dashboard_pws=123456
-
-
 ```
+
 frpc.ini
 ```shell
 [common]
@@ -99,15 +98,11 @@ remote_port = 48010
 #local_ip = 127.0.0.1
 #local_port = 22
 #remote_port = 6000
-
-
-
 ```
 
 server端添加服务
 ```shell
 nano /etc/systemd/system/frp.service
-
 ```
 
 ```shell
@@ -123,7 +118,6 @@ Restart=on-failure # or always, on-abort, etc
 
 [Install]
 WantedBy=multi-user.target
-
 ```
 
 ```shell
@@ -132,7 +126,6 @@ systemctl enable frp
 systemctl start frp      
 systemctl status frp     
 systemctl restart frp    
-
 ```
 
 
