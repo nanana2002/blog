@@ -5,6 +5,11 @@
         "file": "posts/BH3GEI's Blog.md"
     },
     {
+        "title": "呼和浩特市自习场所整理",
+        "time": "2022-06-24",
+        "file": "posts/呼和浩特自习场所整理.md"
+    },
+    {
         "title": "考研科目",
         "time": "2020-10-03",
         "file": "posts/考研科目.md"
@@ -20,26 +25,6 @@
         "file": "posts/有关考研.md"
     },
     {
-        "title": "数据结构笔记",
-        "time": "2022-06-22",
-        "file": "posts/数据结构笔记.md"
-    },
-    {
-        "title": "操作系统笔记",
-        "time": "2022-06-22",
-        "file": "posts/操作系统笔记.md"
-    },
-    {
-        "title": "计算机网络笔记",
-        "time": "2022-06-22",
-        "file": "posts/计算机网络笔记.md"
-    },
-    {
-        "title": "计算机组成原理笔记",
-        "time": "2022-06-22",
-        "file": "posts/计算机组成原理笔记.md"
-    },
-    {
         "title": "基于esp32的体感手势遥控器",
         "time": "2022-05-22",
         "file": "posts/基于esp32的体感手势遥控器.md"
@@ -53,11 +38,6 @@
         "title": "烤冷面制作流程",
         "time": "2022-06-22",
         "file": "posts/烤冷面制作流程.md"
-    },
-    {
-        "title": "脆香米炒饭制作流程",
-        "time": "2022-06-23",
-        "file": "posts/脆香米炒饭制作流程.md"
     },
     {
         "title": "腾讯云Ubuntu的一些初始配置",
@@ -78,16 +58,6 @@
         "title": "UbuntuServer的Minecraft服务器搭建过程",
         "time": "2022-06-24",
         "file": "posts/UbuntuServer的Minecraft服务器搭建过程.md"
-    },
-    {
-        "title": "考研数学全流程笔记",
-        "time": "2022-06-24",
-        "file": "posts/考研数学全流程笔记.md"
-    },
-    {
-        "title": "呼和浩特市自习场所整理",
-        "time": "2022-06-24",
-        "file": "posts/呼和浩特自习场所整理.md"
     },
     {
         "title": "codeserver安装copilot",
