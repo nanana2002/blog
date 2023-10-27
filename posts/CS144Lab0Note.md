@@ -62,3 +62,32 @@ Connection: close
 ```
 
 ### Assignment：
+
+```bash
+
+cs144@vm:~$ proxychains4 telnet cs144.keithw.org http
+[proxychains] config file found: /etc/proxychains4.conf
+[proxychains] preloading /usr/lib/x86_64-linux-gnu/libproxychains.so.4
+[proxychains] DLL init: proxychains-ng 4.16
+Trying 224.0.0.1...
+[proxychains] Strict chain  ...  192.168.1.12:9808  ...  cs144.keithw.org:80  ...  OK
+Connected to cs144.keithw.org.
+Escape character is '^]'.
+GET /lab0/11190307 HTTP/1.1
+Host: cs144.keithw.org
+Connection: close
+
+HTTP/1.1 200 OK
+Date: Fri, 27 Oct 2023 15:49:35 GMT
+Server: Apache
+X-You-Said-Your-SunetID-Was: 11190307
+***X-Your-Code-Is: 241933***
+Content-length: 112
+Vary: Accept-Encoding
+Connection: close
+Content-Type: text/plain
+
+Hello! You told us that your SUNet ID was "11190307". Please see the HTTP headers (above) for your secret code.
+Connection closed by foreign host.
+
+```
