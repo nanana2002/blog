@@ -81,7 +81,7 @@ HTTP/1.1 200 OK
 Date: Fri, 27 Oct 2023 15:49:35 GMT
 Server: Apache
 X-You-Said-Your-SunetID-Was: 11190307
-***X-Your-Code-Is: 241933***
+*** X-Your-Code-Is: 241933 ***
 Content-length: 112
 Vary: Accept-Encoding
 Connection: close
