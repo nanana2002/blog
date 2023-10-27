@@ -1,3 +1,4 @@
+<div style="display:none;">
 >   **2020 JLU_CTF部分赛题解题思路(无营养)**
 
 >   由于本人比较菜，只写了这么几道题，求大佬轻喷。
@@ -216,3 +217,22 @@
     并把flag图样中的点状图换为与点数相等的数字，可得flag为：
 
     Spirit{FFF9A7C5577A}
+</div>
+
+
+# 2020 JLU_CTF部分赛题解题思路(无营养)
+
+由于本人比较菜，只写了这么几道题，求大佬轻喷。bilibili网安做了六道题也懒得写了，排版也懒得弄了。
+
+## 1. something so fast
+
+![]()**思路**：解压文件后得到一个.gif文件，每一帧都是一个二维码。利用[在线服务](https://zh.bloggif.com/gif-extract?id=a2baa5235403e274622ce0848197e96f)逐帧分解.gif文件服务，得到九张二维码图片，每张扫描后得到flag的一部分。顺序连接得到flag为：`Spirit{8c5c6150-c6bf-4473-ad6a-380016e29ced}`。## 2. YLBNB![]()**思路**：解压后得到.png图片文件，使用Windows PowerShell的`Format-Hex ./great_captcha.png`命令得到图片文件的十六进制。肉眼观察（在任一文本编辑器ctrl+f查找）后可以发现flag在第105行，上下文为：```00000650 70 68 6F 74 6F 73 68 6F 70 3A 4C 61 79 65 72 54 photoshop:LayerT00000660 65 78 74 3D 22 53 70 69 72 69 74 7B 69 5F 31 5F ext="Spirit{i_1\_00000670 6C 5F 4C 5F 49 5F 6F 5F 4F 5F 30 5F 43 5F 63 5F l_L_I_o_O_0_C_c\_00000680 57 5F 77 7D 22 2F 3E 20 3C 2F 72 64 66 3A 42 61 W_w}"/\> \</rdf:Ba00000690 67 3E 20 3C 2F 70 68 6F 74 6F 73 68 6F 70 3A 54 g\> \</photoshop:T000006A0 65 78 74 4C 61 79 65 72 73 3E 20 3C 2F 72 64 66 extLayers\> \</rdf000006B0 3A 44 65 73 63 72 69 70 74 69 6F 6E 3E 20 3C 2F :Description\> \</000006C0 72 64 66 3A 52 44 46 3E 20 3C 2F 78 3A 78 6D 70 rdf:RDF\> \</x:xmp```故flag为：`Spirit{i_1_l_L_I_o_O_0_C_c_W_w}`。## 3. 锟斤拷![]()**思路**：在dev c++内以GBK格式保存字符串”锛筹綈锝夛綊锝夛綌锝涳及锛瑉锛嶏綍锝擄絽锛嶏綍锝旓絾锛嶏紭锛嶏綈锝曪綊锝咃綄锝欙綕”到一个文本文档, 再用vscode以utf-8模式打开此文本文档，即可得到”Ｓｐｉｒｉｔ{ＰＬz－ｕｓｅ－ｕｔｆ－８－ｐｕｒｅｌｙ}”，根据题意得到flag为：`Spirit{ＰＬz－ｕｓｅ－ｕｔｆ－８－ｐｕｒｅｌｙ}`。## 4. 大佬的学习计划表![]()![]()![]()![]()把每一个日期都画在日历上可以得到如下图样：![]()[(圈是误画，)其中第五位字符处产生了两个字母”I”
+”E”与数字”6”之间的歧义(将“i”拼到”E”的右边就是”6”),多次实验得到其表意为”6”.]最终得到全部字符为” 5471609XNFHZ”, 故flag为：`Spirit{5471609XNFHZ}`.## 5. 双重保险![]()材料下载：https://misakanetwork.lanzous.com/irxJRhdf3ve利用网址 [https://www.toolnb.com/tools/pyc.html](https://www.toolnb.com/tools/pyc.html)提供的服务对题目提供的压缩包内部的double_check.pyc进行反编译得到如下代码：```pythondef xor(a, b):    return bytes([x[0] ^ x[1] for x in zip(a, b)])def load_asset():    return open('data', 'rb').read()def check(data, key1, key2):    key1 = int(key1)    cipher = data[key1:key1 + 26]    return xor(key2.encode(), cipher) == 'Kvbm4aeoZzR5upGgKjqPE39ovM'if __name__ == '__main__':    data = load_asset()    key1 = input('Plz input password 1:')    key2 = input('Plz input password 2:')    try:        result = check(data, key1, key2)    except Exception as e:        try:            result = False        finally:            e = None            del e    if result:        print('Correct!')    else:        print('Nope. Try again!')```解析后， 利用如下代码试出flag：```pythondef xor(a, b):    return bytes([x[0] ^ x[1] for x in zip(a, b)])def load_asset():    return open('data', 'rb').read()def check(data, key1, key2):    key1 = int(key1)    cipher = data[key1:key1 + 7] #"Spirit{"共7个字符    return xor(key2.encode(), cipher) == 'Kvbm4ae' #返回值应为"Spirit{"加密的结果data = load_asset()total = 'Kvbm4aeoZzR5upGgKjqPE39ovM'crack = data[374543:374569] #根据前七位定位到data二进制文件的374543位处flag开始，直到374569位，此区间内与flag相同，共27个字符。k = 0for j in total:    for i in range(0, 127):        if xor(i,crack[k]) == (total[k].encode()):            print(chr(i)) #比对读取的二进制文件和尝试字符值i的值，穷举后满足条件输出该位字符。试验出flag內所有字符后跳出循环            k+=1            break```可得输出结果为：`Spirit{prune_1s_1mp0rtant}`.
+
+## 6. Shell
+
+![]()在安装了netcat的linux环境下输入命令 `nc 59.72.109.16 30001`，然后继续输入 `ls -l`，得到当前目录下的所有文件列表：![]()继续使用 `cat` 命令得到 flag：![]()
+
+## 7. 签到题：凯撒密码：`Mjclcn{mcah_ch_qcnb_wuymul?}`凯撒密码，一种简单的替换密码。使用 Android app “Caesar cipher” 或其他 web 解密服务可直接得到 25（因为只有 26 个英文字母，故只有 25 个方案）个不同的结果：![]()根据字符串片段“Spirit”可知 flag 为：`Spirit{sign_in_with_caesar?}`。
+
+## 8. 小猪佩奇![]()根据猪圈密码：![]()并把 flag 图样中的点状图换为与点数相等的数字，可得 flag 为：`Spirit{FFF9A7C5577A}`。以上就是我所解答的所有题目，希望能对大家有所帮助，也欢迎有更好解法的大佬们指正。
