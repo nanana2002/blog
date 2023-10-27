@@ -22,7 +22,10 @@ sudo vim /etc/apt/sshd_config
 将 `'PermitRootLogin without-password'` 注释为 `'#PermitRootLogin without-password'` 并添加 `'PermitRootLogin yes'`
 
 ### 设置端口转发
-![image]()使用mobaxterm进行连接。### 换成国内源以便于中国国内使用：
+
+### 使用mobaxterm进行连接
+
+### 换成国内源以便于中国国内使用：
 
 ```bash
 
