@@ -195,7 +195,7 @@ Connection closed by foreign host.
 ```
 ## 3 Writing a network program using an OS stream socket:
 
-#### 内容翻译：
+### 内容翻译：
 
 在本实验中，我们将编写一个简单的程序，该程序能通过互联网获取网页。这是通过使用操作系统（例如Linux）提供的一项功能实现的，即创建一个可靠的双向字节流，该字节流连接运行在本地计算机和互联网上另一台计算机（例如Web服务器）的两个程序。这种功能被称为流套接字，它对于程序和Web服务器来说，就像是一个普通的文件描述符。
 
@@ -260,7 +260,7 @@ cs144@vm:~/minnow$ cmake --build build
 
 ## 3.2 Modern C++: mostly safe but still fast and low-level
 
-#### 内容翻译：
+### 内容翻译：
 
 实验室的作业将会使用现代C++风格完成，这种风格使用了最近（2011年）的特性，以尽可能安全地编程。这可能与你过去被要求编写C++的方式不同。关于这种风格的参考，请查看[C++核心指南](http://isocpp.github.io/CppCoreGuidelines/CppCoreGuidelines)。基本的想法是确保每个对象都设计有尽可能小的公开接口，有许多内部安全检查，难以被错误使用，并知道如何自我清理。我们想要避免“配对”操作（例如，malloc/free，或new/delete），其中第二半对可能不会发生（例如，如果函数提前返回或抛出异常）。相反，操作发生在对象的构造函数中，反向操作发生在析构函数中。这种风格被称为“资源获取即初始化”，或RAII。喵～
 
@@ -286,13 +286,60 @@ cs144@vm:~/minnow$ cmake --build build
 
 ## 3.3 Reading the Minnow support code
 
-#### 内容翻译：
+### 内容翻译：
 
 为了支持这种编程风格，Minnow的类将操作系统函数（可以从C中调用）封装在“现代”C++中。我们为你提供了C++封装器，用于我们希望你在CS 110/111中已经熟悉的概念，特别是套接字和文件描述符。
 
 请阅读公共接口（在文件util/socket.hh和util/file descriptor.hh中，位于“public:”后的部分）。（请注意，Socket是FileDescriptor的一种类型，而TCPSocket是Socket的一种类型。）喵～
 
 ## 3.4 Writing webget
+
+### 内容翻译：
+
+是时候实现 webget 了，这是一个通过使用操作系统的 TCP 支持和流套接字抽象来获取互联网上的 Web 页面的程序——就像你在此实验室中之前手动做的一样。
+
+1. 从构建目录中打开文件 ../apps/webget.cc ，在文本编辑器或 IDE 中打开它。
+2. 在 get URL 函数中，找到以 “// Your code here.” 开始的注释。
+3. 按照本文件中描述的，使用你之前使用的 HTTP（Web）请求的格式，实现简单的Web客户端。使用 TCPSocket 和 Address 类。
+4. 提示：
+    - 请注意，在 HTTP 中，每一行必须以 “\r\n” 结束（只使用 “\n” 或 endl 是不够的）。
+    - 不要忘记在你的客户端请求中包含 “Connection: close” 行。这告诉服务器，它不应该等待你的客户端在这一个请求后发送任何更多的请求。相反，服务器会发送一次回复，然后会立即结束它的出站字节流（从服务器的套接字到你的套接字的那个）。当你读取了来自服务器的整个字节流时，你会发现你的入站字节流已经结束，因为你的套接字会到达 “EOF”（文件结束）。这就是你的客户端知道服务器已经完成回复的方式。
+    - 确保读取并打印服务器发出的所有输出，直到套接字到达 “EOF”（文件结束）——一次调用 read 是不够的。
+    - 我们预计你需要编写大约十行代码。
+5. 通过运行 make 来编译你的程序。如果你看到错误信息，你需要在继续之前修复它。
+6. 通过运行 ./apps/webget cs144.keithw.org /hello 来测试你的程序。这与你在 Web 浏览器中访问 http://cs144.keithw.org/hello 时看到的相比如何？它与第2.1节的结果相比如何？随意实验——使用你喜欢的任何 http URL来测试它！
+7. 当它似乎正常工作时，运行 cmake --build build --target check webget 来运行自动化测试。在实现 get URL 函数之前，你应该预期看到以下内容：
+
+```bash
+$ cmake --build build --target check_webget
+Test project /home/cs144/minnow/build
+Start 1: compile with bug-checkers
+1/2 Test #1: compile with bug-checkers ........ Passed 1.02 sec
+Start 2: t_webget
+2/2 Test #2: t_webget .........................***Failed 0.01 sec
+Function called: get_URL(cs144.keithw.org, /nph-hasher/xyzzy)
+Warning: get_URL() has not been implemented yet.
+ERROR: webget returned output that did not match the test's expectations
+```
+
+完成任务后，你将看到：
+
+```bash
+$ cmake --build build --target check_webget
+Test project /home/cs144/minnow/build
+Start 1: compile with bug-checkers
+1/2 Test #1: compile with bug-checkers ........ Passed 1.09 sec
+Start 2: t_webget
+2/2 Test #2: t_webget ......................... Passed 0.72 sec
+100% tests passed, 0 tests failed out of 2
+```
+
+8. 评分者将使用与 make check webget 运行的不同的主机名和路径来运行你的 webget 程序——因此请确保它不仅仅只能与单元测试使用的主机名和路径一起工作。
+   
+### 代码
+
+### 输出
+
 
 ## 4 An in-memory reliable byte stream
 
