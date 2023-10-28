@@ -337,7 +337,35 @@ Start 2: t_webget
 8. 评分者将使用与 make check webget 运行的不同的主机名和路径来运行你的 webget 程序——因此请确保它不仅仅只能与单元测试使用的主机名和路径一起工作。
    
 ### 代码
+```c
 
+void get_URL( const string& host, const string& path )
+{
+
+  // Your code here.
+
+  // You will need to connect to the "http" service on
+  // the computer whose name is in the "host" string,
+  // then request the URL path given in the "path" string.
+
+  // Then you'll need to print out everything the server sends back,
+  // (not just one call to read() -- everything) until you reach
+  // the "eof" (end of file).
+  TCPSocket tSocket;
+  tSocket.connect(Address(host,"http"));
+  tSocket.write("GET "+ path + " HTTP/1.1\r\n");
+  tSocket.write("Connection: Close\r\n\r\n");
+  tSocket.shutdown(SHUT_WR);
+  while(!tSocket.eof()){
+        cerr<<tSocket.read();
+        }
+  tSocket.Close();
+
+  cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
+  cerr << "Warning: get_URL() has not been implemented yet.\n";
+}
+
+```
 ### 输出
 
 
