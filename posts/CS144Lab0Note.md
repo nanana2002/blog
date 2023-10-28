@@ -1,4 +1,4 @@
-## 一、环境配置：
+## 1、环境配置：
 
 ### 下载课程提供的virtubox镜像：
 - 说明文档：[https://stanford.edu/class/cs144/vm_howto/vm-howto-image.html](https://stanford.edu/class/cs144/vm_howto/vm-howto-image.html)
@@ -48,7 +48,7 @@ EOF"
 
 根据 [LittleTools](https://github.com/BH3GEI/LittleTools) 中的小工具配置国内网络环境。
 
-## 二、Fetch a Web page：
+## 2.1 Fetch a Web page：
 
 示例：
 
@@ -91,3 +91,20 @@ Hello! You told us that your SUNet ID was "11190307". Please see the HTTP header
 Connection closed by foreign host.
 
 ```
+## 2.2 Send yourself an email：
+
+## 2.3 Listening and connecting:
+
+## 3 Writing a network program using an OS stream socket:
+
+## 3.1 Let’s get started—fetching and building the starter code
+
+## 3.2 Modern C++: mostly safe but still fast and low-level
+
+## 3.3 Reading the Minnow support code
+
+## 3.4 Writing webget
+
+## 4 An in-memory reliable byte stream
+
+## 5 Submit
