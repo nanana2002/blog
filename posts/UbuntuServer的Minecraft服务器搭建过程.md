@@ -80,9 +80,3 @@ source ./.bashrc
 mccommand
 
 ```
-
-> 记录下发现的远古遗迹:
-> 1666 -49 -1111 
-
-> 参考来源：
-> https://linuxize.com/post/how-to-make-minecraft-server-on-ubuntu-20-04/
