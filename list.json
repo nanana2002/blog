@@ -5,7 +5,7 @@
         "file": "posts/BH3GEI's Blog.md"
     },
     {
-        "title": "呼和浩特市自习场所整理",
+        "title": "自习场所整理",
         "time": "2022-06-24",
         "file": "posts/呼和浩特自习场所整理.md"
     },
@@ -15,14 +15,9 @@
         "file": "posts/考研科目.md"
     },
     {
-        "title": "ctf部分笔记",
+        "title": "2020 JLU-CTF 部分笔记",
         "time": "2020-10-03",
         "file": "posts/ctf部分笔记.md"
-    },
-    {
-        "title": "有关考研",
-        "time": "2020-10-03",
-        "file": "posts/有关考研.md"
     },
     {
         "title": "基于esp32的体感手势遥控器",
@@ -33,11 +28,6 @@
         "title": "本地挂载网盘的一些折腾记录",
         "time": "2022-06-22",
         "file": "posts/本地挂载网盘的一些折腾记录.md"
-    },
-    {
-        "title": "烤冷面制作流程",
-        "time": "2022-06-22",
-        "file": "posts/烤冷面制作流程.md"
     },
     {
         "title": "腾讯云Ubuntu的一些初始配置",
