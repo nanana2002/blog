@@ -677,7 +677,7 @@ Test project /home/cs144/minnow/build
       Start  9: compile with optimization
  9/10 Test  #9: compile with optimization ........   Passed    5.35 sec
       Start 10: byte_stream_speed_test
-             ByteStream throughput: 14.85 Gbit/s
+             ByteStream throughput: 16.30 Gbit/s
 10/10 Test #10: byte_stream_speed_test ...........   Passed    0.06 sec
 
 100% tests passed, 0 tests failed out of 10
