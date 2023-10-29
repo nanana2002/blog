@@ -472,3 +472,218 @@ Built target check_webget
 - 需要能处理很长的字节流。
 - 本实验是在内存里面模拟。后面的实验可能就不是在内存里面模拟，而是在不可靠的IP层上进行。
 
+### 代码
+```c
+#pragma once
+
+#include <queue>
+#include <stdexcept>
+#include <string>
+#include <string_view>
+
+class Reader;
+class Writer;
+
+class ByteStream
+{
+protected:
+  enum State { CLOSED, ERROR };
+  uint64_t capacity_;
+  uint64_t bytes_pushed_ {}; // 已写入的字节数
+  uint64_t bytes_popped_ {}; // 已弹出的字节数
+
+  unsigned char flag {};	// 0: normal, 1: closed, 2: error
+  std::queue<std::string> buffer_data {};
+  std::string_view buffer_view {};
+
+public:
+  explicit ByteStream( uint64_t capacity );
+
+  // 提供ByteStream的 reader 和 writer 接口的辅助函数
+  Reader& reader();
+  const Reader& reader() const;
+  Writer& writer();
+  const Writer& writer() const;
+};
+
+class Writer : public ByteStream
+{
+public:
+  void push( std::string data ) noexcept; // 在可用容量允许的范围内向流中写入数据
+
+  void close() noexcept; // 关闭流，不允许再向流中写入数据
+  void set_error() noexcept; // 流中出现错误，置位错误标志
+
+  bool is_closed() const noexcept;      // 判断流是否已关闭
+  uint64_t available_capacity() const noexcept; // 计算流中剩余可用容量
+  uint64_t bytes_pushed() const noexcept;       // 计算流中已写入的字节数
+};
+
+class Reader : public ByteStream
+{
+public:
+  std::string_view peek() const noexcept; // 返回流中下一个数据块的只读视图
+  void pop( uint64_t len ) noexcept;      // 从流中弹出指定长度的数据块
+
+  bool is_finished() const noexcept; // 判断流是否已关闭且所有数据块都已弹出
+  bool has_error() const noexcept;   // 判断流是否出现错误
+
+  uint64_t bytes_buffered() const noexcept; // 计算当前流中剩余的字节数
+  uint64_t bytes_popped() const noexcept;   // 计算流中已弹出的字节数
+};
+
+/*
+ * read: A (provided) helper function thats peeks and pops up to `len` bytes
+ * from a ByteStream Reader into a string;
+ */
+void read( Reader& reader, uint64_t len, std::string& out );
+
+
+```
+
+```c
+
+#include <stdexcept>
+
+#include "byte_stream.hh"
+
+using namespace std;
+
+ByteStream::ByteStream( uint64_t capacity ) : capacity_( capacity ) {}
+
+void Writer::push( string data ) noexcept
+{
+  auto len = min( data.size(), available_capacity() );	// 确定可写入的数据长度
+  if ( len == 0 ) { // 如果可写入的数据长度为0，说明已经写满了，返回
+    return;
+  } else if ( len < data.size() ) { // 如果可写入的数据长度小于 data 的长度，说明只能写入部分数据
+    data.resize( len );             // 将 data 的长度截断为可写入的长度
+  }
+  // 将 data 写入到 buffer 中
+  buffer_data.push( move( data ) );
+  if ( buffer_data.size() == 1)  // 写入前为空时需要更新 buffer_view
+    buffer_view = buffer_data.front();   
+  // 更新已写入的数据长度
+  bytes_pushed_ += len;
+}
+
+void Writer::close() noexcept
+{
+  flag |= ( 1 << CLOSED );
+}
+
+void Writer::set_error() noexcept
+{
+  flag |= ( 1 << ERROR );
+}
+
+bool Writer::is_closed() const noexcept
+{
+  return flag & ( 1 << CLOSED );
+}
+
+uint64_t Writer::available_capacity() const noexcept
+{
+  return capacity_ - reader().bytes_buffered();
+}
+
+uint64_t Writer::bytes_pushed() const noexcept
+{
+  return bytes_pushed_;
+}
+
+string_view Reader::peek() const noexcept
+{
+  return buffer_view;
+}
+
+bool Reader::is_finished() const noexcept
+{
+  return writer().is_closed() && ( bytes_buffered() == 0 );
+}
+
+bool Reader::has_error() const noexcept
+{
+  return flag & ( 1 << ERROR );
+}
+
+void Reader::pop( uint64_t len ) noexcept
+{
+  if ( len > bytes_buffered() ) {
+    return;
+  }
+  // 更新已弹出的数据长度
+  bytes_popped_ += len;
+
+  // 将 buffer 中的数据弹出
+  while ( len > 0 ) {
+    if ( len >= buffer_view.size() ) {
+      len -= buffer_view.size();
+      buffer_data.pop();
+      buffer_view = buffer_data.front(); // 最开始就保证了 buffer_data 不为空
+    } else {
+      buffer_view.remove_prefix( len );
+      len = 0;
+    }
+  }
+}
+
+uint64_t Reader::bytes_buffered() const noexcept
+{
+  return writer().bytes_pushed() - bytes_popped();
+}
+
+uint64_t Reader::bytes_popped() const noexcept
+{
+  return bytes_popped_;
+}
+
+
+```
+
+
+### 输出
+
+```bash
+cs144@vm:~/minnow/build$ make
+[ 41%] Built target util_debug
+Consolidate compiler generated dependencies of target minnow_debug
+[ 50%] Building CXX object src/CMakeFiles/minnow_debug.dir/byte_stream.cc.o
+[ 58%] Building CXX object src/CMakeFiles/minnow_debug.dir/byte_stream_helpers.cc.o
+[ 66%] Linking CXX static library libminnow_debug.a
+[ 66%] Built target minnow_debug
+[ 83%] Built target minnow_testing_debug
+[ 91%] Linking CXX executable webget
+[100%] Built target webget
+cs144@vm:~/minnow/build$ cd ..
+cs144@vm:~/minnow$ cmake --build build --target check0
+Test project /home/cs144/minnow/build
+      Start  1: compile with bug-checkers
+ 1/10 Test  #1: compile with bug-checkers ........   Passed   15.89 sec
+      Start  2: t_webget
+ 2/10 Test  #2: t_webget .........................   Passed    1.74 sec
+      Start  3: byte_stream_basics
+ 3/10 Test  #3: byte_stream_basics ...............   Passed    0.01 sec
+      Start  4: byte_stream_capacity
+ 4/10 Test  #4: byte_stream_capacity .............   Passed    0.01 sec
+      Start  5: byte_stream_one_write
+ 5/10 Test  #5: byte_stream_one_write ............   Passed    0.01 sec
+      Start  6: byte_stream_two_writes
+ 6/10 Test  #6: byte_stream_two_writes ...........   Passed    0.01 sec
+      Start  7: byte_stream_many_writes
+ 7/10 Test  #7: byte_stream_many_writes ..........   Passed    0.04 sec
+      Start  8: byte_stream_stress_test
+ 8/10 Test  #8: byte_stream_stress_test ..........   Passed    0.08 sec
+      Start  9: compile with optimization
+ 9/10 Test  #9: compile with optimization ........   Passed    5.35 sec
+      Start 10: byte_stream_speed_test
+             ByteStream throughput: 14.85 Gbit/s
+10/10 Test #10: byte_stream_speed_test ...........   Passed    0.06 sec
+
+100% tests passed, 0 tests failed out of 10
+
+Total Test time (real) =  23.22 sec
+Built target check0
+
+
+```
