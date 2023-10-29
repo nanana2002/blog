@@ -337,7 +337,19 @@ Start 2: t_webget
 8. 评分者将使用与 make check webget 运行的不同的主机名和路径来运行你的 webget 程序——因此请确保它不仅仅只能与单元测试使用的主机名和路径一起工作。
    
 ### 代码
+
+的确在10行左右。
+
 ```c
+
+#include "socket.hh"
+
+#include <cstdlib>
+#include <iostream>
+#include <span>
+#include <string>
+
+using namespace std;
 
 void get_URL( const string& host, const string& path )
 {
@@ -351,23 +363,106 @@ void get_URL( const string& host, const string& path )
   // Then you'll need to print out everything the server sends back,
   // (not just one call to read() -- everything) until you reach
   // the "eof" (end of file).
+  //cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
+  //cerr << "Warning: get_URL() has not been implemented yet.\n";
+
   TCPSocket tSocket;
   tSocket.connect(Address(host,"http"));
-  tSocket.write("GET "+ path + " HTTP/1.1\r\n");
-  tSocket.write("Connection: Close\r\n\r\n");
-  tSocket.shutdown(SHUT_WR);
+  const string stringToSend = "GET "+ path + " HTTP/1.1\r\n"
+    + "Host: " + host + "\r\n"
+    + "Connection: close\r\n\r\n";
+ 
+  tSocket.write(stringToSend);
+  //tSocket.shutdown(SHUT_WR);  //已经close了所以不需要再关闭写通道
+  
+  std::string readBuffer;
   while(!tSocket.eof()){
-        cerr<<tSocket.read();
-        }
-  tSocket.Close();
+    tSocket.read(readBuffer);
+    cout<<readBuffer;
+  }//废弃
 
-  cerr << "Function called: get_URL(" << host << ", " << path << ")\n";
-  cerr << "Warning: get_URL() has not been implemented yet.\n";
+  tSocket.close();
+
+
+}
+
+int main( int argc, char* argv[] )
+{
+  try {
+    if ( argc <= 0 ) {
+      abort(); // For sticklers: don't try to access argv[0] if argc <= 0.
+    }
+
+    auto args = span( argv, argc );
+
+    // The program takes two command-line arguments: the hostname and "path" part of the URL.
+    // Print the usage message unless there are these two arguments (plus the program name
+    // itself, so arg count = 3 in total).
+    if ( argc != 3 ) {
+      cerr << "Usage: " << args.front() << " HOST PATH\n";
+      cerr << "\tExample: " << args.front() << " stanford.edu /class/cs144\n";
+      return EXIT_FAILURE;
+    }
+
+    // Get the command-line arguments.
+    const string host { args[1] };
+    const string path { args[2] };
+
+    // Call the student-written function.
+    get_URL( host, path );
+  } catch ( const exception& e ) {
+    cerr << e.what() << "\n";
+    return EXIT_FAILURE;
+  }
+
+  return EXIT_SUCCESS;
 }
 
 ```
 ### 输出
 
+编译和输出如下
+```bash
+cs144@vm:~/minnow/build$ make
+[ 41%] Built target util_debug
+[ 66%] Built target minnow_debug
+[ 83%] Built target minnow_testing_debug
+Consolidate compiler generated dependencies of target webget
+[ 91%] Building CXX object apps/CMakeFiles/webget.dir/webget.cc.o
+[100%] Linking CXX executable webget
+[100%] Built target webget
+cs144@vm:~/minnow/build$ ./apps/webget cs144.keithw.org /hello
+HTTP/1.1 200 OK
+Date: Sun, 29 Oct 2023 05:14:19 GMT
+Server: Apache
+Last-Modified: Thu, 13 Dec 2018 15:45:29 GMT
+ETag: "e-57ce93446cb64"
+Accept-Ranges: bytes
+Content-Length: 14
+Connection: close
+Content-Type: text/plain
+
+Hello, CS144!
+cs144@vm:~/minnow/build$
+
+
+```
+
+check通过：
+```bash
+cs144@vm:~/minnow/build$ make check_webget
+Test project /home/cs144/minnow/build
+    Start 1: compile with bug-checkers
+1/2 Test #1: compile with bug-checkers ........   Passed    1.04 sec
+    Start 2: t_webget
+2/2 Test #2: t_webget .........................   Passed    1.06 sec
+
+100% tests passed, 0 tests failed out of 2
+
+Total Test time (real) =   2.10 sec
+Built target check_webget
+
+```
 
 ## 4 An in-memory reliable byte stream
 
