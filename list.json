@@ -58,5 +58,15 @@
         "title": "CS144 Lab0 Note",
         "time": "2023-10-27",
         "file": "posts/CS144Lab0Note.md"
-    }
+    },
+    {
+        "title": "USTC Hackergame 2023 Writeups",
+        "time": "2023-11-4",
+        "file": "posts/Hackergame2023.md"
+    },
+    {
+        "title": "关于Vue在Cloudflare和Github Pages的部署",
+        "time": "2023-11-4",
+        "file": "posts/VueDeployment.md"
+    }    
 ]
