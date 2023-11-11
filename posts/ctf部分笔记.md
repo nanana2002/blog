@@ -1,4 +1,5 @@
 [writeup.pdf](https://github.com/BH3GEI/blog/files/13324474/writeup.pdf)
+![result_BdeoA](https://github.com/BH3GEI/blog/assets/58540850/753eeb55-d804-496b-9ba6-8cf5ae7d7f42)
 
 # 2020 JLU_CTF部分赛题解题思路(无营养)
 
