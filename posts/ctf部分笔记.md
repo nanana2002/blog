@@ -1,3 +1,5 @@
+[writeup.pdf](https://github.com/BH3GEI/blog/files/13324474/writeup.pdf)
+
 # 2020 JLU_CTF部分赛题解题思路(无营养)
 
 当时只做出这么几道题。bilibili网安做了六道题但这里还没有记录。
@@ -5,6 +7,7 @@
 ## 1. something so fast
 
 ![]()**思路**：
+
 
 解压文件后得到一个.gif文件，每一帧都是一个二维码。利用[在线服务](https://zh.bloggif.com/gif-extract?id=a2baa5235403e274622ce0848197e96f)逐帧分解.gif文件服务，得到九张二维码图片，每张扫描后得到flag的一部分。顺序连接得到flag为：`Spirit{8c5c6150-c6bf-4473-ad6a-380016e29ced}`。
 
