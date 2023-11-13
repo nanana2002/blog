@@ -1,13 +1,13 @@
 ### 在github pages的部署
 
-首先在本地写好之后，进行编译，git上传，最后配置一下仓库
+1. ** 首先在本地写好之后，进行编译，git上传，最后配置一下仓库 **
 
 ```bash
 $ npm run build
 
 ```
 
-记得注释掉.gitignore文件中的dist文件
+2. ** 注释掉.gitignore文件中的dist文件 **
 
 ```bash
 $ git add .
@@ -17,7 +17,7 @@ $ git subtree push --prefix dist origin gh-pages
 
 ```
 
-打开github仓库的setting配置，选择Pages配置项，Source项选择Deploy from a branch，Branch项选择gh_pages分支下的/(root)文件夹。
+3. ** 打开github仓库的setting配置，选择Pages配置项，Source项选择Deploy from a branch，Branch项选择gh_pages分支下的/(root)文件夹。 **
 
 ### 在Cloudflare Workers的部署
 
@@ -73,5 +73,3 @@ $ git subtree push --prefix dist origin gh-pages
     ```bash
     wrangler publish
     ```
-
-    这会把项目部署到 Cloudflare Workers，并输出你的项目的 URL。
