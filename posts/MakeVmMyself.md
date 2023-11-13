@@ -145,9 +145,175 @@ int main() {
 下一步或许应该添加一些更复杂的指令并引入指令编码？
 
 先写一下试试看。
+
+首先，定义一些操作码（opcode）来表示指令。可以使用枚举类型来定义操作码。比如：
+
+```cpp
+typedef enum {
+    OP_HALT,  // 停止执行
+    OP_LOAD,  // 加载值到寄存器
+    OP_ADD,   // 添加两个寄存器的值
+    OP_STORE, // 将寄存器的值存储到内存
+    // 更多的指令...
+} Opcode;
+```
+
+然后表示指令。一个简单的方法是使用一个结构体，其中包含操作码和一些操作数：
+
+```cpp
+typedef struct {
+    Opcode opcode;
+    int reg1;
+    int reg2;
+    int reg3;
+    int value;  // 对于LOAD指令，这是要加载到寄存器的值；对于STORE指令，这是内存的地址
+} Instruction;
+```
+
+接下来，我们可以修改`vm_run`函数，让它执行一个指令数组，而不是硬编码的指令：
+
+```c
+void vm_run(VM* vm, Instruction* instructions, int num_instructions) {
+    for (int i = 0; i < num_instructions; i++) {
+        Instruction* instr = &instructions[i];
+        switch (instr->opcode) {
+            case OP_HALT:
+                return;
+            case OP_LOAD:
+                vm->regA = instr->value;
+                break;
+            case OP_ADD:
+                vm->regC = vm->regA + vm->regB;
+                break;
+            case OP_STORE:
+                vm->memory[instr->value] = vm->regC;
+                break;
+            // 更多的指令...
+        }
+    }
+}
+```
+
+然后在`main`函数中创建指令并运行：
+
+```c
+int main() {
+    // 创建并初始化
+    VM vm;
+    vm_init(&vm);
+
+    // 创建指令
+    Instruction instructions[] = {
+        {OP_LOAD, .value = 5},
+        {OP_LOAD, .value = 3},
+        {OP_ADD},
+        {OP_STORE, .value = 0},
+        {OP_HALT}
+    };
+
+    // 执行指令
+    vm_run(&vm, instructions, sizeof(instructions) / sizeof(Instruction));
+
+    // 打印状态
+    vm_print(&vm);
+
+    // 清理
+    vm_free(&vm);
+
+    return 0;
+}
+```
+
+综合起来就是下面这样：
+
 ```cpp
 
+#include <stdio.h>
+#include <stdlib.h>
 
+typedef enum {
+    OP_HALT,
+    OP_LOAD,
+    OP_ADD,
+    OP_STORE,
+} Opcode;
+
+typedef struct {
+    Opcode opcode;
+    int reg1;
+    int reg2;
+    int reg3;
+    int value;
+} Instruction;
+
+typedef struct {
+    int regA;
+    int regB;
+    int regC;
+    int* memory;
+    int memory_size;
+} VM;
+
+void vm_init(VM* vm, int memory_size) {
+    vm->regA = 0;
+    vm->regB = 0;
+    vm->regC = 0;
+    vm->memory = (int*)calloc(memory_size, sizeof(int));
+    vm->memory_size = memory_size;
+}
+
+void vm_free(VM* vm) {
+    free(vm->memory);
+    vm->memory = NULL;
+    vm->memory_size = 0;
+}
+
+void vm_run(VM* vm, Instruction* instructions, int num_instructions) {
+    for (int i = 0; i < num_instructions; i++) {
+        Instruction* instr = &instructions[i];
+        switch (instr->opcode) {
+            case OP_HALT:
+                return;
+            case OP_LOAD:
+                vm->regA = instr->value;
+                break;
+            case OP_ADD:
+                vm->regB = vm->regA;
+                vm->regA = instr->value;
+                vm->regC = vm->regA + vm->regB;
+                break;
+            case OP_STORE:
+                vm->memory[instr->value] = vm->regC;
+                break;
+        }
+    }
+}
+
+void vm_print(VM* vm) {
+    printf("regA: %d\n", vm->regA);
+    printf("regB: %d\n", vm->regB);
+    printf("regC: %d\n", vm->regC);
+    printf("memory[0]: %d\n", vm->memory[0]);
+}
+
+int main() {
+    VM vm;
+    vm_init(&vm, 10);
+
+    Instruction instructions[] = {
+        {OP_LOAD, .value = 5},
+        {OP_LOAD, .value = 3},
+        {OP_ADD},
+        {OP_STORE, .value = 0},
+        {OP_HALT}
+    };
+
+    vm_run(&vm, instructions, sizeof(instructions) / sizeof(Instruction));
+    vm_print(&vm);
+    vm_free(&vm);
+
+    return 0;
+}
 
 ```
 
