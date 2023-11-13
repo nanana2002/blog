@@ -68,5 +68,10 @@
         "title": "关于Vue在Cloudflare和Github Pages的部署",
         "time": "2023-11-5",
         "file": "posts/VueDeployment.md"
+    },
+    {
+        "title": "从零开始写一个虚拟机的一些尝试",
+        "time": "2023-11-13",
+        "file": "posts/MakeVmMyself.md"
     }    
 ]
