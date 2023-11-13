@@ -2,20 +2,20 @@
 
 1. **首先在本地写好之后，进行编译，git上传，最后配置一下仓库**
 
-```bash
-$ npm run build
-
-```
+    ```bash
+    $ npm run build
+    
+    ```
 
 2. **注释掉.gitignore文件中的dist文件**
 
-```bash
-$ git add .
-$ git commit -m "test 2"
-$ git push origin master
-$ git subtree push --prefix dist origin gh-pages
-
-```
+    ```bash
+    $ git add .
+    $ git commit -m "test 2"
+    $ git push origin master
+    $ git subtree push --prefix dist origin gh-pages
+    
+    ```
 
 3. **打开github仓库的setting配置，选择Pages配置项，Source项选择Deploy from a branch，Branch项选择gh_pages分支下的/(root)文件夹。**
 
