@@ -85,7 +85,7 @@ void vm_init(VM* vm) {
     vm->regB = 0;
     vm->regC = 0;
     vm->regD = 0;
-    vm->memory = malloc(MEM_SIZE);  // 为内存区域分配空间
+    vm->memory = static_cast<unsigned char*>(malloc(MEM_SIZE));  // 为内存区域分配空间
     if (vm->memory == NULL) {
         fprintf(stderr, "Failed to allocate memory\n");
         exit(1);
@@ -139,4 +139,16 @@ int main() {
 - vm_print函数打印寄存器的值和内存的第一个字节的值。
 
 仍然很弱智，但是现在它有了更多的寄存器和一些内存。
+
+#### 进行下一步的尝试
+
+下一步或许应该添加一些更复杂的指令并引入指令编码？
+
+先写一下试试看。
+```cpp
+
+
+
+```
+
 
