@@ -170,7 +170,7 @@ typedef struct {
 } Instruction;
 ```
 
-接下来，我们可以修改`vm_run`函数，让它执行一个指令数组，而不是硬编码的指令：
+接下来修改`vm_run`函数，让它执行一个指令数组，而不是硬编码的指令：
 
 ```c
 void vm_run(VM* vm, Instruction* instructions, int num_instructions) {
