@@ -46,7 +46,7 @@ $ git subtree push --prefix dist origin gh-pages
     account_id = "your-account-id"
     ```
 
-3. **构建你的项目**
+3. **构建项目**
 
     在 Vue 项目中运行以下命令来构建它：
 
@@ -58,7 +58,7 @@ $ git subtree push --prefix dist origin gh-pages
 
 4. **配置 Wrangler 来部署项目**
 
-    需要配置 Wrangler 来把你的 `dist` 文件夹部署到 Cloudflare Workers。在 `wrangler.toml` 配置文件中，添加以下行：
+    需要配置 Wrangler 来把 `dist` 文件夹部署到 Cloudflare Workers。在 `wrangler.toml` 配置文件中，添加以下行：
 
     ```toml
     [site]
@@ -74,4 +74,4 @@ $ git subtree push --prefix dist origin gh-pages
     wrangler publish
     ```
 
-    这会把你的项目部署到 Cloudflare Workers，并输出你的项目的 URL。
+    这会把项目部署到 Cloudflare Workers，并输出你的项目的 URL。
