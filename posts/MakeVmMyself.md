@@ -396,5 +396,5 @@ http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#0.0
 
 #### 成果演示
 
-#### 第三步 尝试实现一个可用的Game Boy虚拟机
+### 第三步 尝试实现一个可用的Game Boy虚拟机
 
