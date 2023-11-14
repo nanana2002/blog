@@ -340,6 +340,8 @@ Chip-8 并不是实际的硬件，它是一种虚拟机（如 Java）。在七�
 
 一些参考资料：
 
+https://github.com/BH3GEI/build-your-own-x#build-your-own-emulator--virtual-machine
+
 https://www.jmeiners.com/lc3-vm/#s0:8
 
 https://github.com/leonmavr/chip-8
@@ -350,3 +352,28 @@ http://www.emulator101.com/introduction-to-chip-8.html
 
 http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#0.0
 
+#### 初步的设计
+
+应该会包含以下几个文件：
+
+- `main.cpp`：主程序，处理命令行参数，创建和运行CHIP-8实例
+- `chip8.h` 和 `chip8.cpp`：定义并实现 CHIP-8 虚拟机的主要功能
+    - 其中`chip8.h` 文件定义一个 CHIP-8 类，它包含：
+        - 内存、寄存器、栈、计数器等状态。
+        - 加载 ROM 到内存的方法。
+        - 模拟 CPU 周期的方法，包括获取和解码操作码，执行相应的操作。
+        - 实现 CHIP-8 指令集的方法。
+- `display.h` 和 `display.cpp`：处理屏幕显示，分辨率64*32，可能得调一个图形库
+    - `display.h` 文件定义一个 Display 类，包含：
+        - 一个二维数组，表示屏幕的状态。
+        - 清除屏幕的方法。
+        - 绘制像素的方法。 
+- `keyboard.h` 和 `keyboard.cpp`：处理键盘输入。16 键，每个键对应一个十六进制的数字
+    - `keyboard.h` 文件定义一个 Keyboard 类，包含：
+        - 一个数组，表示键盘的状态。
+        - 检查键是否被按下的方法。
+        - 等待键被按下的方法。
+- `sound.h` 和 `sound.cpp`：处理声音输出。声音计数器不为零时，应播放声音。
+    - `sound.h` 文件定义一个 Sound 类，包含以下内容：
+        - 播放声音的方法。
+        - 停止播放声音的方法。
