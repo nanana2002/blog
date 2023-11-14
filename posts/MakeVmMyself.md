@@ -374,6 +374,6 @@ http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#0.0
         - 检查键是否被按下的方法。
         - 等待键被按下的方法。
 - `sound.h` 和 `sound.cpp`：处理声音输出。声音计数器不为零时，应播放声音。
-    - `sound.h` 文件定义一个 Sound 类，包含以下内容：
+    - `sound.h` 文件定义一个 Sound 类，包含：
         - 播放声音的方法。
         - 停止播放声音的方法。
