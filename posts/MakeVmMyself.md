@@ -340,6 +340,7 @@ Chip-8 并不是实际的硬件，它是一种虚拟机（如 Java）。在七�
 
 一些参考资料：
 
+https://www.jmeiners.com/lc3-vm/#s0:8
 
 https://github.com/leonmavr/chip-8
 
