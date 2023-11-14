@@ -336,4 +336,16 @@ CHIP-8指令集只有35条指令，很多小白都用它来上手，那咱也写
 - 输入：一个16键的键盘，通常被用于用户输入。
 - 显示：一个64x32像素的单色显示。
 
+Chip-8 并不是实际的硬件，它是一种虚拟机（如 Java）。在七八十年代，人们为了对微型计算机（例如Telmac 1800）进行编程而设计了它。它并不使用实际的微处理器操作码，而是一直被设计为一种虚拟语言，并在运行时进行解释。
+
+一些参考资料：
+
+
+https://github.com/leonmavr/chip-8
+
+http://www.hobbylabs.org/telmac.htm
+
+http://www.emulator101.com/introduction-to-chip-8.html
+
+http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#0.0
 
