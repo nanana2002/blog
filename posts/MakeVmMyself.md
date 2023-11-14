@@ -391,6 +391,8 @@ http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#0.0
 
 首先，我开了个新的项目：https://github.com/BH3GEI/CHIP-8VirtualMachine
 
+另外，我的工作是Make the OS，所以我之后会用别人的rom测试：https://github.com/dmatlack/chip8/tree/master/roms/games
+
 开发过程的所思所想都会记录在这里。
 
 
