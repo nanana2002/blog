@@ -387,7 +387,11 @@ http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#0.0
         - 播放声音的方法。
         - 停止播放声音的方法。
 
-#### 编写代码中遇到的问题
+#### 开发过程笔记
+
+首先，我开了个新的项目：https://github.com/BH3GEI/CHIP-8VirtualMachine
+
+开发过程的所思所想都会记录在这里。
 
 
 #### 成果演示
