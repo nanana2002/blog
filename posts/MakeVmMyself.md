@@ -349,17 +349,13 @@ Chip-8 并不是实际的硬件，它是一种虚拟机（如 Java）。在七�
 
 一些参考资料：
 
-https://github.com/BH3GEI/build-your-own-x#build-your-own-emulator--virtual-machine
-
-https://www.jmeiners.com/lc3-vm/#s0:8
-
-https://github.com/leonmavr/chip-8
-
-http://www.hobbylabs.org/telmac.htm
-
-http://www.emulator101.com/introduction-to-chip-8.html
-
-http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#0.0
+- https://github.com/BH3GEI/build-your-own-x#build-your-own-emulator--virtual-machine
+- https://www.jmeiners.com/lc3-vm/#s0:8
+- https://github.com/leonmavr/chip-8
+- http://www.hobbylabs.org/telmac.htm
+- http://www.emulator101.com/introduction-to-chip-8.html
+- http://devernay.free.fr/hacks/chip8/C8TECH10.HTM#0.0
+- https://github.com/sarbajitsaha/Chip-8-Emulator
 
 #### 初步的设计
 
