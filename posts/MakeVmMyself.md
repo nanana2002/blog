@@ -349,6 +349,7 @@ Chip-8 并不是实际的硬件，它是一种虚拟机（如 Java）。在七�
 
 一些参考资料：
 
+- http://www.cs.columbia.edu/~sedwards/classes/2016/4840-spring/designs/Chip8.pdf
 - https://github.com/BH3GEI/build-your-own-x#build-your-own-emulator--virtual-machine
 - https://www.jmeiners.com/lc3-vm/#s0:8
 - https://github.com/leonmavr/chip-8
