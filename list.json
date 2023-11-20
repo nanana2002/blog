@@ -73,5 +73,10 @@
         "title": "从零开始写一个虚拟机的一些尝试",
         "time": "2023-11-13",
         "file": "posts/MakeVmMyself.md"
-    }    
+    },
+    {
+        "title": "一个迷宫小游戏",
+        "time": "2023-11-13",
+        "file": "posts/MazeGame.md"
+    }
 ]
