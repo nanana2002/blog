@@ -68,6 +68,90 @@ while True:
 
 Games101基因动了，笑死。
 
-当然了，性能在我这里并不是第一优先，一切以赶紧实现一个简单的demo为最优先。下面写一些废话，然后就开始coding。
+当然了，性能在我这里并不是第一优先，一切以赶紧实现一个简单的demo为最优先。下面先写一些废话和伪代码。
 
 在一个Linux环境中，如Ubuntu，直接进行图形渲染最基本的方式是使用framebuffer。Framebuffer是一个在内核级别提供的接口，它允许直接向显示设备写入像素数据。
+
+
+下面贴一段丑陋的伪代码，我想先实现一个旋转的立方体。
+
+```cpp
+
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <linux/fb.h>
+#include <sys/mmap.h>
+#include <math.h>
+#include <unistd.h>
+
+// 3D向量
+struct Vec3 {
+    float x, y, z;
+};
+
+// 3D旋转
+Vec3 rotate(Vec3 v, float angleX, float angleY, float angleZ) {
+    // 实现3D旋转的矩阵运算
+}
+
+int main() {
+    // 打开framebuffer
+    int fbfd = open("/dev/fb0", O_RDWR);
+    struct fb_var_screeninfo vinfo;
+    ioctl(fbfd, FBIOGET_VSCREENINFO, &vinfo);
+
+    // 映射framebuffer到内存
+    long screensize = vinfo.xres * vinfo.yres * vinfo.bits_per_pixel / 8;
+    char* fbp = mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fbfd, 0);
+
+    // 立方体的顶点
+    Vec3 cube[8] = {
+        {-1, -1, -1},
+        {1, -1, -1},
+        {1, 1, -1},
+        {-1, 1, -1},
+        {-1, -1, 1},
+        {1, -1, 1},
+        {1, 1, 1},
+        {-1, 1, 1},
+    };
+
+    float angle = 0;
+    while(1) {
+        // 清除屏幕
+        memset(fbp, 0, screensize);
+
+        // 计算旋转的角度
+        angle += 0.01;
+        if(angle > 2 * M_PI) angle -= 2 * M_PI;
+
+        // 绘制立方体的每条边
+        for(int i = 0; i < 8; i++) {
+            for(int j = i + 1; j < 8; j++) {
+                // 如果顶点i和j之间有一条边
+                if(abs(i - j) == 1 || abs(i - j) == 2 || abs(i - j) == 4) {
+                    // 计算旋转后的顶点位置
+                    Vec3 vi = rotate(cube[i], angle, angle, angle);
+                    Vec3 vj = rotate(cube[j], angle, angle, angle);
+
+                    // 线段的光栅化
+                    // 查找Bresenham算法或者DDA算法?
+                }
+            }
+        }
+
+        // 等待下一帧
+        usleep(10000);
+    }
+
+    // 释放资源
+    munmap(fbp, screensize);
+    close(fbfd);
+
+    return 0;
+}
+
+```
+
+接下来具体的实现：
+
