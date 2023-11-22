@@ -135,7 +135,7 @@ int main() {
                     Vec3 vj = rotate(cube[j], angle, angle, angle);
 
                     // 线段的光栅化
-                    // 查找Bresenham算法或者DDA算法?
+                    // Bresenham或者DDA?
                 }
             }
         }
