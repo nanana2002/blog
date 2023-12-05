@@ -38,3 +38,9 @@ Control Structure (Conditional Branch, Loop, etc.), Data Type (Character String,
 数据结构：王道考研视频，过去问。yanweimin数据结构+网课
 
 数电：b站视频，到时序电路之前为止（时序不考）
+
+
+https://ac.tsukuba.ac.jp/en
+https://ac.tsukuba.ac.jp/examination
+https://www.cs.tsukuba.ac.jp/admission/problem.pdf
+https://www.cs.tsukuba.ac.jp/admission/problem-eng.pdf
