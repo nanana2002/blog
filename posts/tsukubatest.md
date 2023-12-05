@@ -41,6 +41,9 @@ Control Structure (Conditional Branch, Loop, etc.), Data Type (Character String,
 
 
 https://ac.tsukuba.ac.jp/en
+
 https://ac.tsukuba.ac.jp/examination
+
 https://www.cs.tsukuba.ac.jp/admission/problem.pdf
+
 https://www.cs.tsukuba.ac.jp/admission/problem-eng.pdf
