@@ -25,7 +25,7 @@ Set, Propositional Logic, Function (surjection, injection, image, composite func
 Control Structure (Conditional Branch, Loop, etc.), Data Type (Character String, Array, etc.), Data Structure (Stack, Queue, List, Tree, etc.), Function, Recursive Call, C language, Python.
 
 
-## 备考资料
+### 备考资料
 
 线性代数：李永乐考研视频，寺田文行线性代数，江川博康大学生的线性代数。
 
