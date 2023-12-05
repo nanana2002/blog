@@ -1,0 +1,25 @@
+## 考试范围
+
+### 分析学
+函数及其极限，序列的极限，无穷级数，单变量分析，多变量分析（偏导数，多重积分）。
+
+### Analysis
+Function and its limit, Limit of a sequence, Infinite series, Analysis in one variable, Analysis in several variables (partial derivative, multiple integral).
+
+### 线性代数
+矩阵，行列式，向量空间，线性映射，核和像，内积空间，特征值，特征向量，矩阵对角化。
+
+### Linear Algebra
+Matrix, Determinant, Vector space, Linear mapping, Kernel and image, Inner product spaces, Eigenvalues, Eigenvectors, Matrix diagonalization.
+
+### 离散数学和逻辑
+集合，命题逻辑，函数（满射，单射，像，复合函数等），关系，布尔代数，卡诺图，组合电路。
+
+### Discrete Mathematics and Logic
+Set, Propositional Logic, Function (surjection, injection, image, composite function, etc.), Relation, Boolean Algebra, Karnaugh Map, Combinatorial Circuit.
+
+### 编程基础
+控制结构（条件分支，循环等），数据类型（字符串，数组等），数据结构（栈，队列，列表，树等），函数，递归调用，C语言，Python。
+
+### Fundamentals of Programming
+Control Structure (Conditional Branch, Loop, etc.), Data Type (Character String, Array, etc.), Data Structure (Stack, Queue, List, Tree, etc.), Function, Recursive Call, C language, Python.
