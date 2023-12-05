@@ -27,7 +27,7 @@ Control Structure (Conditional Branch, Loop, etc.), Data Type (Character String,
 
 ### 备考资料
 
-对着官网考点看即可
+对着官网考点看
 
 线性代数：~李永乐考研视频，寺田文行线性代数，江川博康大学生的线性代数。~ 猴
 
