@@ -23,3 +23,16 @@ Set, Propositional Logic, Function (surjection, injection, image, composite func
 
 ### Fundamentals of Programming
 Control Structure (Conditional Branch, Loop, etc.), Data Type (Character String, Array, etc.), Data Structure (Stack, Queue, List, Tree, etc.), Function, Recursive Call, C language, Python.
+
+
+## 备考资料
+
+线性代数：李永乐考研视频，寺田文行线性代数，江川博康大学生的线性代数。
+
+微积分：张宇考研视频，寺田文行微分积分，江川博康大学生的微积分。
+
+离散数学：b站电子科技大学视频，Ohmsha离散数学。
+
+数据结构：王道考研视频，过去问。
+
+数电：b站视频，到时序电路之前为止（时序不考）
