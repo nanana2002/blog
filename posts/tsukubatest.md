@@ -35,10 +35,11 @@ Control Structure (Conditional Branch, Loop, etc.), Data Type (Character String,
 
 离散数学：~b站电子科技大学视频，Ohmsha离散数学。~ 离散数学第五版+猴，侧重自然演绎、谓词逻辑等偏难内容，集合命题关系函数等简单内容一笔带过。
 
-数据结构：王道考研视频，过去问。yanweimin数据结构+网课
+数据结构：王道考研视频，过去问。yanweimin数据结构+随便什么网课，不如试试看猴博士
 
 数电：b站视频，到时序电路之前为止（时序不考）
 
+算法：
 
 #### 相关链接
 https://ac.tsukuba.ac.jp/en
