@@ -1,3 +1,176 @@
+## Building a Virtual Machine from Scratch
+
+### Step 1: Theory Learning and Verification
+#### First Try
+
+```cpp
+#include <stdio.h>
+
+// Virtual machine has only one register
+typedef struct {
+    int reg;
+} VM;
+
+void vm_init(VM* vm) {
+    vm->reg = 0;
+}
+
+// Single instruction: addition
+void vm_add(VM* vm, int value) {
+    vm->reg += value;
+}
+
+// Print status
+void vm_print(VM* vm) {
+    printf("Register: %d\n", vm->reg);
+}
+
+int main() {
+    // Create and initialize
+    VM vm;
+    vm_init(&vm);
+
+    // Execute
+    vm_add(&vm, 5);
+    vm_add(&vm, 3);
+
+    // Print status
+    vm_print(&vm);
+
+    return 0;
+}
+```
+
+This virtual machine can only perform a very simple operation - adding two numbers together. To keep things simple, I've ignored some complex features that a real virtual machine should have, such as actual instruction sets, memory management, etc.
+
+- The VM structure represents the state of the virtual machine. It has only one field: an integer register.
+- The vm_init function initializes the virtual machine's state. It sets the register to 0.
+- The vm_add function is the only instruction the virtual machine can execute. It adds a value to the register.
+- The vm_print function prints the virtual machine's state. It displays the current value of the register.
+- The main function creates and initializes the virtual machine, executes some instructions, then prints the virtual machine's state.
+
+This example demonstrates the basic idea of a virtual machine: it maintains some state (a register) and can execute instructions that change this state.
+
+#### Further Understanding
+
+What's next?
+
+- Add more registers?
+- Introduce memory?
+- Implement more complex instructions?
+- Introduce instruction encoding?
+- Add device emulation?
+- Simulate a real CPU architecture??
+
+It gets too deep for me to understand fully, so let's start by adding more registers and introducing memory to see how it goes.
+
+#### Attempting the Next Step
+
+The next step might be to add some more complex instructions and introduce instruction encoding?
+
+Let's try writing it out.
+
+First, let's define some operation codes (opcodes) to represent instructions. We can use an enumeration type to define the opcodes. For example:
+
+```cpp
+typedef enum {
+    OP_HALT,  // Stop execution
+    OP_LOAD,  // Load value into register
+    OP_ADD,   // Add values from two registers
+    OP_STORE, // Store register value in memory
+    // More instructions...
+} Opcode;
+```
+
+Then represent instructions. A simple way is to use a structure that includes the opcode and some operands:
+
+```cpp
+typedef struct {
+    Opcode opcode;
+    int reg1;
+    int reg2;
+    int reg3;
+    int value;  // For LOAD instruction, this is the value to load into register; for STORE instruction, this is the memory address
+} Instruction;
+```
+
+Next, modify the `vm_run` function to execute an array of instructions instead of hardcoded ones:
+
+```c
+void vm_run(VM* vm, Instruction* instructions, int num_instructions) {
+    for (int i = 0; i < num_instructions; i++) {
+        Instruction* instr = &instructions[i];
+        switch (instr->opcode) {
+            case OP_HALT:
+                return;
+            case OP_LOAD:
+                vm->regA = instr->value;
+                break;
+            case OP_ADD:
+                vm->regC = vm->regA + vm->regB;
+                break;
+            case OP_STORE:
+                vm->memory[instr->value] = vm->regC;
+                break;
+            // More instructions...
+        }
+    }
+}
+```
+
+Then create and run instructions in the `main` function:
+
+```c
+int main() {
+    // Create and initialize
+    VM vm;
+    vm_init(&vm);
+
+    // Create instructions
+    Instruction instructions[] = {
+        {OP_LOAD, 0, 0, 0, 5},    // Load 5 into regA
+        {OP_LOAD, 0, 0, 0, 3},    // Load 3 into regB
+        {OP_ADD, 0, 0, 0, 0},     // Add regA and regB, store in regC
+        {OP_STORE, 0, 0, 0, 0},   // Store regC in memory[0]
+        {OP_HALT, 0, 0, 0, 0}     // Stop execution
+    };
+
+    // Run instructions
+    vm_run(&vm, instructions, 5);
+
+    // Print status
+    vm_print(&vm);
+
+    // Cleanup
+    vm_free(&vm);
+
+    return 0;
+}
+```
+
+Now we have a more complete virtual machine with:
+- Multiple registers
+- Memory
+- Instruction encoding
+- Multiple instruction types
+- Instruction sequence execution
+
+The next step could be:
+1. Add more instructions (subtract, multiply, divide, etc.)
+2. Add flow control instructions (jump, conditional jump)
+3. Add stack operations
+4. Add I/O operations
+
+For example, we could implement a CHIP-8 emulator, which is a simple but complete virtual machine system. The basic structure would be:
+
+- `chip8.h` and `chip8.cpp`: Define and implement the main functionality of the CHIP-8 virtual machine
+    - The `chip8.h` file defines a CHIP-8 class that includes:
+        - States like memory, registers, stack, counters, etc.
+        - Methods for loading ROM into memory
+        - Methods for simulating CPU cycles, including fetching and decoding opcodes, executing corresponding operations.
+
+---
+
 ## 从零开始写一个自己的虚拟机
 
 ### 第一步 理论学习与验证
@@ -63,6 +236,7 @@ int main() {
 - 模拟一个真实的CPU架构？？
 
 太深了我也理解不了，那就先增加更多的寄存器，引入内存来试试看
+
 ```cpp
 
 #include <stdio.h>
@@ -119,7 +293,7 @@ int main() {
     VM vm;
     vm_init(&vm);
 
-    // 执行指令
+    // 执行
     vm_run(&vm);
 
     // 打印状态
@@ -222,6 +396,7 @@ int main() {
 
     return 0;
 }
+
 ```
 
 综合起来就是下面这样：
@@ -317,6 +492,7 @@ int main() {
 
 ```
 
+
 ### 第二步 尝试创建CHIP-8虚拟机
 
 #### 引入
@@ -329,13 +505,14 @@ CHIP-8指令集只有35条指令，很多小白都用它来上手，那咱也写
 
 #### CHIP-8的基本特性
 
-```
+```cpp
    ________    _             ____ 
   / ____/ /_  (_)___        ( __ )
  / /   / __ \/ / __ \______/ __  |
 / /___/ / / / / /_/ /_____/ /_/ / 
 \____/_/ /_/_/ .___/      \____/  
             /_/                   
+
 ```
 
 - 内存：4KB，从0x000到0xFFF。
@@ -379,7 +556,7 @@ Chip-8 并不是实际的硬件，它是一种虚拟机（如 Java）。在七�
         - 一个数组，表示键盘的状态。
         - 检查键是否被按下的方法。
         - 等待键被按下的方法。
-- `sound.h` 和 `sound.cpp`：处理声音输出。声音计数器不为零时，应播放声音。
+- `sound.h` 和 `sound.cpp`：处理声音输出。声音计时器不为零时，应播放声音。
     - `sound.h` 文件定义一个 Sound 类，包含：
         - 播放声音的方法。
         - 停止播放声音的方法。

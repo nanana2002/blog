@@ -1,3 +1,158 @@
+# A Simple Yet Potentially Complex Maze Game
+
+This is a toy project that I started on impulse.
+
+It's still in early development, and I'm not sure what it will eventually become.
+
+GitHub link: https://github.com/BH3GEI/MazeGame
+
+### Step 1: Writing a Simple Test
+
+```python
+class Room(object):
+
+    def __init__(self, name, description, end_game=False):
+        self.name = name
+        self.description = description
+        self.end_game = end_game
+        self.paths = {}
+
+    def go(self, direction):
+        return self.paths.get(direction, None)
+
+    def add_paths(self, paths):
+        self.paths.update(paths)
+
+start = Room("Start", "You are in a dim room with three doors: one in front, one to the left, and one to the right.")
+gold_room = Room("GoldRoom", "This room is full of gold. You win!", end_game=True)
+death = Room("Death", "You walk into an empty room. Suddenly, the door closes behind you, and you're trapped. Game Over.", end_game=True)
+maze_room = Room("Maze", "You've entered a maze. Find your way out!")
+hidden_room = Room("HiddenRoom", "You've found a hidden room with a secret passage to the gold room.")
+
+start.add_paths({'forward': death, 'left': maze_room, 'right': death})
+gold_room.add_paths({'back': start})
+maze_room.add_paths({'left': hidden_room, 'right': start})
+hidden_room.add_paths({'forward': gold_room})
+
+map = {
+    "Start": start,
+    "GoldRoom": gold_room,
+    "Death": death,
+    "Maze": maze_room,
+    "HiddenRoom": hidden_room,
+}
+
+location = "Start"
+
+while True:
+    room = map[location]
+
+    print("\n" + "-" * 10)
+    print(room.description)
+
+    if room.end_game:
+        break
+
+    action = input("> ")
+
+    if action in room.paths.keys():
+        location = room.go(action).name
+    else:
+        print("You can't do that.")
+```
+
+### Step 2: Attempting 3D Scene Rendering
+
+I've worked with existing frameworks before. So I thought, why not implement my own graphics engine?
+
+The Games101 genes are kicking in, haha.
+
+Of course, performance isn't my top priority here. The primary goal is to quickly implement a simple demo. Here's some preliminary thoughts and pseudocode.
+
+In a Linux environment like Ubuntu, the most basic way to perform graphics rendering is using the framebuffer. Framebuffer is a kernel-level interface that allows direct pixel data writing to the display device.
+
+Here's some ugly pseudocode where I want to implement a rotating cube first:
+
+```cpp
+#include <fcntl.h>
+#include <sys/ioctl.h>
+#include <linux/fb.h>
+#include <sys/mmap.h>
+#include <math.h>
+#include <unistd.h>
+
+// 3D vector
+struct Vec3 {
+    float x, y, z;
+};
+
+// 3D rotation
+Vec3 rotate(Vec3 v, float angleX, float angleY, float angleZ) {
+    // Implement 3D rotation matrix calculations
+}
+
+int main() {
+    // Open framebuffer
+    int fbfd = open("/dev/fb0", O_RDWR);
+    struct fb_var_screeninfo vinfo;
+    ioctl(fbfd, FBIOGET_VSCREENINFO, &vinfo);
+
+    // Map framebuffer to memory
+    long screensize = vinfo.xres * vinfo.yres * vinfo.bits_per_pixel / 8;
+    char* fbp = mmap(0, screensize, PROT_READ | PROT_WRITE, MAP_SHARED, fbfd, 0);
+
+    // Cube vertices
+    Vec3 cube[8] = {
+        {-1, -1, -1},
+        {1, -1, -1},
+        {1, 1, -1},
+        {-1, 1, -1},
+        {-1, -1, 1},
+        {1, -1, 1},
+        {1, 1, 1},
+        {-1, 1, 1},
+    };
+
+    float angle = 0;
+    while(1) {
+        // Clear screen
+        memset(fbp, 0, screensize);
+
+        // Calculate rotation angle
+        angle += 0.01;
+        if(angle > 2 * M_PI) angle -= 2 * M_PI;
+
+        // Draw each edge of the cube
+        for(int i = 0; i < 8; i++) {
+            for(int j = i + 1; j < 8; j++) {
+                // If there's an edge between vertices i and j
+                if(abs(i - j) == 1 || abs(i - j) == 2 || abs(i - j) == 4) {
+                    // Calculate rotated vertex positions
+                    Vec3 vi = rotate(cube[i], angle, angle, angle);
+                    Vec3 vj = rotate(cube[j], angle, angle, angle);
+
+                    // Line rasterization
+                    // Bresenham or DDA?
+                }
+            }
+        }
+
+        // Wait for next frame
+        usleep(10000);
+    }
+
+    // Free resources
+    munmap(fbp, screensize);
+    close(fbfd);
+
+    return 0;
+}
+```
+
+Next steps for implementation:
+
+---
+
 # 一个可能简单也可能复杂的迷宫小游戏
 
 这是一时冲动去写的一个玩具项目。
@@ -9,7 +164,6 @@
 ### 第一步，写一个最简单的测试
 
 ```python
-
 class Room(object):
 
     def __init__(self, name, description, end_game=False):
@@ -72,11 +226,9 @@ Games101基因动了，笑死。
 
 在一个Linux环境中，如Ubuntu，直接进行图形渲染最基本的方式是使用framebuffer。Framebuffer是一个在内核级别提供的接口，它允许直接向显示设备写入像素数据。
 
-
 下面贴一段丑陋的伪代码，我想先实现一个旋转的立方体。
 
 ```cpp
-
 #include <fcntl.h>
 #include <sys/ioctl.h>
 #include <linux/fb.h>
@@ -154,4 +306,3 @@ int main() {
 ```
 
 接下来具体的实现：
-

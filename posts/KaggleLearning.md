@@ -2,6 +2,97 @@
 Personal Notes
 
 ## LMSYS - Chatbot Arena Human Preference Predictions
+Predict which response users are more likely to prefer in head-to-head matchups between chatbots powered by large language models (LLMs), ensuring that LLM-generated responses align with user preferences.
+
+### https://www.kaggle.com/code/awsaf49/lmsys-kerasnlp-starter
+
+A very basic and detailed explanation, which I followed step by step.
+
+1. **Environment Setup** (Installing necessary libraries, selecting JAX backend)
+
+2. **Data Preprocessing** (Loading, understanding dataset structure, preprocessing data)
+
+3. **Model Configuration** (Defining model parameters, data splitting, preprocessing settings)
+
+4. **Building Data Loaders** (Creating training and validation data loaders using tf.data.Dataset)
+
+5. **Model Building, Training, and Performance Monitoring** (Building, compiling, training, and using callbacks for model performance monitoring and saving the best model)
+
+### https://www.kaggle.com/code/siddhvr/lmsys-cahpp-llama3-8b-inference-baseline
+
+Using LLM (Large Language Model) Llama 3 and machine learning algorithms (like LightGBM) for model fusion (different models may learn different features and patterns from the data, and by reasonably combining these models' predictions, better results can be achieved than any single model). Specifically, it applies two different methods and then performs weighted fusion of their prediction results.
+
+1. **Library Imports:** Including `transformers`, `tokenizers`, `bitsandbytes`, `peft`, etc.
+```python
+!pip install -q -U bitsandbytes --no-index --find-links ../input/llm-detect-pip/
+!pip install -q -U transformers --no-index --find-links ../input/llm-detect-pip/
+!pip install -q -U tokenizers --no-index --find-links ../input/llm-detect-pip/
+!pip install -q -U peft --no-index --find-links ../input/llm-detect-pip/
+```
+
+2. **Data Preprocessing:** Implemented a simple preprocessing function 'process' that combines multiple strings into a single long string and formats text by adding specific prefixes (like "User prompt", "Model A", "Model B", etc.).
+```python
+import pandas as pd
+
+# Load test set
+test = pd.read_csv('/path/to/your/test.csv')
+
+# Preprocessing function
+def process(input_str):
+    """
+    Process a single data entry.
+    - Remove outer brackets from string list representation.
+    - Concatenate string list elements into a single string.
+    """
+    if not isinstance(input_str, str):
+        return ""
+    
+    # Remove brackets from string list and split by commas
+    stripped_str = input_str.strip('[]')
+    sentences = [s.strip('"') for s in stripped_str.split('","')]
+    
+    # Join the split string list into a single string
+    return ' '.join(sentences)
+
+# Call function
+test.loc[:, 'prompt'] = test['prompt'].apply(process)
+test.loc[:, 'response_a'] = test['response_a'].apply(process)
+test.loc[:, 'response_b'] = test['response_b'].apply(process)
+
+# Combine into a complete long string
+test['text'] = 'User prompt: ' + test['prompt'] + '\n\nModel A :\n' + test['response_a'] + '\n\n--------\n\nModel B:\n' + test['response_b']
+
+print(test['text'][0])  
+```
+
+3. **Model Loading and Configuration:** Used the `transformers` library to load a sequence classification model configuration from a pre-trained Llama model, and used `BitsAndBytesConfig` for performance optimization. Two model instances were configured for different GPUs, and pre-trained weights were loaded.
+```python
+# Load AutoTokenizer for text tokenization
+tokenizer = AutoTokenizer.from_pretrained(MODEL_NAME)
+
+# Configure BitsAndBytes for performance optimization
+bnb_config = BitsAndBytesConfig(load_in_8bit=True, bnb_8bit_compute_dtype=torch.float16, bnb_8bit_use_double_quant=False)
+
+# Load Llama model based on configuration and model path
+base_model_0 = LlamaForSequenceClassification.from_pretrained(MODEL_NAME, num_labels=3, torch_dtype=torch.float16, quantization_config=bnb_config, device_map='cuda:0')
+base_model_0.config.pad_token_id = tokenizer.pad_token_id
+```
+
+4. **Feature Extraction and Model Prediction:** For the LightGBM part, features were extracted from training and test texts using `CountVectorizer`, then the LightGBM model was loaded and predictions were made on the test set. For the Llama model, test data was tokenized using AutoTokenizer, and predictions were generated in parallel on two GPUs.
+```python
+tokens = tokenizer(test['text'].tolist(), padding='max_length', max_length=MAX_LENGTH, truncation=True, return_tensors='pt')
+INPUT_IDS = tokens['input_ids'].to(DEVICE, dtype=torch.int32)
+ATTENTION_MASKS = tokens['attention_mask'].to(DEVICE, dtype=torch.int32)
+```
+
+5. **Fusion of Prediction Results:** Weighted fusion was performed on predictions from LightGBM and Llama models
+```python
+preds = 0.2 * lgb_preds + 0.8 * llama_preds
+```
+
+---
+
+## LMSYS - Chatbot Arena Human Preference Predictions
 预测在两个大型语言模型（LLMs）驱动的聊天机器人之间的正面交锋中，用户最可能偏好哪种回答，确保LLM生成的回应能够与用户的偏好相符合。
 
 ###  https://www.kaggle.com/code/awsaf49/lmsys-kerasnlp-starter
@@ -17,7 +108,6 @@ Personal Notes
 4. **数据加载器的建立**（用tf.data.Dataset建立训练和验证数据加载器）
 
 5. **模型建立，训练和性能监测**（构建，编译，训练，并使用回调函数进行模型性能监测和保存最佳模型）
-
 
 ### https://www.kaggle.com/code/siddhvr/lmsys-cahpp-llama3-8b-inference-baseline
 
@@ -86,4 +176,3 @@ ATTENTION_MASKS = tokens['attention_mask'].to(DEVICE, dtype=torch.int32)
 5. **融合预测结果：** 把来自LightGBM和Llama模型的预测结果进行了加权融合
 ```python
 preds = 0.2 * lgb_preds + 0.8 * llama_preds
-```
