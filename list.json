@@ -5,52 +5,52 @@
         "file": "posts/BH3GEI's Blog.md"
     },
     {
-        "title": "自习场所整理",
-        "time": "2022-06-24",
-        "file": "posts/呼和浩特自习场所整理.md"
-    },
-    {
-        "title": "考研科目",
+        "title": "Postgraduate Subjects(考研科目)",
         "time": "2020-10-03",
         "file": "posts/考研科目.md"
     },
     {
-        "title": "2020 JLU-CTF 部分笔记",
+        "title": "University of Tsukuba Exam Content(筑波大学考试内容)",
+        "time": "2023-12-05",
+        "file": "posts/tsukubatest.md"
+    },
+    {
+        "title": "2020 JLU-CTF Notes",
         "time": "2020-10-03",
         "file": "posts/ctf部分笔记.md"
     },
     {
-        "title": "基于esp32的体感手势遥控器",
+        "title": "ESP32-based Gesture Remote Control(基于esp32的体感手势遥控器)",
         "time": "2022-05-22",
         "file": "posts/基于esp32的体感手势遥控器.md"
     },
     {
-        "title": "本地挂载网盘的一些折腾记录",
+        "title": "Network Drive Mounting Records(本地挂载网盘的一些折腾记录)",
         "time": "2022-06-22",
         "file": "posts/本地挂载网盘的一些折腾记录.md"
     },
     {
-        "title": "腾讯云Ubuntu的一些初始配置",
+        "title": "Tencent Cloud Ubuntu Initial Configuration(腾讯云Ubuntu的一些初始配置)",
         "time": "2022-06-24",
         "file": "posts/腾讯云Ubuntu的一些初始配置.md"
     },
     {
-        "title": "基于BlueStacks和学小易的超星剪切板搜题工具",
+        "title": "Chaoxing Answer Tool Based on BlueStacks(基于BlueStacks和学小易的超星剪切板搜题工具)",
         "time": "2022-06-20",
         "file": "posts/基于BlueStacks和学小易的超星剪切板搜题工具.md"
     },
     {
-        "title": "Ubuntu服务器搭建Minecraft服务器的一次记录",
+        "title": "Setting up Minecraft Server on Ubuntu(Ubuntu服务器搭建Minecraft服务器的一次记录)",
         "time": "2022-06-24",
         "file": "posts/UbuntuServer的Minecraft服务器搭建过程.md"
     },
     {
-        "title": "codeserver安装copilot",
+        "title": "Install Copilot on Code Server(codeserver安装copilot)",
         "time": "2022-06-24",
         "file": "posts/codeserver安装copilot.md"
     },
     {
-        "title": "frp配置",
+        "title": "FRP Configuration(frp配置)",
         "time": "2022-06-24",
         "file": "posts/frp配置.md"
     },
@@ -65,37 +65,27 @@
         "file": "posts/Hackergame2023.md"
     },
     {
-        "title": "关于Vue在Cloudflare和Github Pages的部署",
+        "title": "Vue Deployment on Cloudflare and Github Pages(关于Vue在Cloudflare和Github Pages的部署)",
         "time": "2023-11-5",
         "file": "posts/VueDeployment.md"
     },
     {
-        "title": "从零开始写一个虚拟机的一些尝试",
+        "title": "Building a Virtual Machine from Scratch(从零开始写一个虚拟机的一些尝试)",
         "time": "2023-11-13",
         "file": "posts/MakeVmMyself.md"
     },
     {
-        "title": "一个迷宫小游戏",
+        "title": "A Maze Game(一个迷宫小游戏)",
         "time": "2023-11-13",
         "file": "posts/MazeGame.md"
     },
     {
-        "title": "筑波大学考试内容",
-        "time": "2023-12-05",
-        "file": "posts/tsukubatest.md"
-    },
-    {
-        "title": "复盘文档 - 家中炸鸡腿油锅意外事件",
-        "time": "2024-04-22",
-        "file": "posts/油锅.md"
-    },
-    {
-        "title": "KaggleLearning笔记",
+        "title": "Kaggle Learning Notes(KaggleLearning笔记)",
         "time": "2024-07-10",
         "file": "posts/KaggleLearning.md"
     },
     {
-        "title": "WebAssemblyLearning笔记",
+        "title": "WebAssembly Learning Notes(WebAssemblyLearning笔记)",
         "time": "2024-07-10",
         "file": "posts/wasm.md"
     }
