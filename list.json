@@ -1,6 +1,6 @@
 [
     {
-        "title": "BH3GEI's Blog",
+        "title": "BH3GEI's Blog 可以改 可以删",
         "time": "2020-10-01",
         "file": "posts/BH3GEI's Blog.md"
     },
@@ -80,12 +80,12 @@
         "file": "posts/MazeGame.md"
     },
     {
-        "title": "Kaggle Learning Notes(KaggleLearning笔记)",
+        "title": "Kaggle Learning Notes(KaggleLearning笔记 可以改 可以删)",
         "time": "2024-07-10",
         "file": "posts/KaggleLearning.md"
     },
     {
-        "title": "WebAssembly Learning Notes(WebAssemblyLearning笔记)",
+        "title": "WebAssembly Learning Notes(WebAssemblyLearning笔记可以改 可以删)",
         "time": "2024-07-10",
         "file": "posts/wasm.md"
     }
